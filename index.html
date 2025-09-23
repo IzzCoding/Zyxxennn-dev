@@ -5,264 +5,194 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shiroko | Zyxxennn</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body, html {
+      height: 100%;
       color: #fff;
+      text-align: center;
       overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
     }
 
     /* Video Background */
     .bg-video {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -2;
-    }
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.55);
       z-index: -1;
     }
 
-    /* Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 25px;
-      background: rgba(30, 144, 255, 0.7);
-      backdrop-filter: blur(5px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+    /* Container utama */
+    .container {
+      position: relative;
+      padding: 20px;
     }
-    header .logo { font-size: 1.5em; font-weight: bold; }
-    nav { display: flex; gap: 15px; }
-    nav button {
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-weight: 500;
-      font-size: 1em;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    nav button:hover, nav button.active { color: #ffd700; }
 
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 70px 20px;
-    }
-    .hero img {
-      width: 180px; height: 180px;
+    /* Avatar */
+    .avatar {
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
-      margin-bottom: 20px;
-      border: 4px solid #1e90ff;
-      animation: float 3s ease-in-out infinite;
-      background: #fff;
-    }
-    .hero h1 {
-      font-size: 2.8em; margin: 10px 0;
-      color: #ffd700; text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-    }
-    .hero p {
-      max-width: 700px; margin: auto;
-      font-size: 1.1em; line-height: 1.6em;
-      color: #f0f0f0; text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
-    }
-
-    /* Social */
-    .social { margin: 40px auto; text-align: center; }
-    .social a {
-      display: inline-block; margin: 10px; padding: 12px 25px;
-      border-radius: 30px; background: #1e90ff; color: #fff;
-      text-decoration: none; font-weight: bold; transition: 0.3s;
-    }
-    .social a:hover { background: #005bbb; transform: scale(1.05); }
-
-    /* Tab Content */
-    .tab-content {
-      display: none;
-      padding: 50px 20px;
-      max-width: 1100px;
-      margin: auto;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    .tab-content.active { display: block; }
-    .tab-content h2 {
-      text-align: center; margin-bottom: 30px;
-      font-size: 2em; color: #ffd700;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
-    }
-
-    /* Cards */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 0.3s;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .card:hover { transform: translateY(-8px); }
-    .card img {
-      width: 100%; height: 160px; object-fit: cover;
-    }
-    .card .content { padding: 15px; flex-grow: 1; }
-    .card .content h3 { margin: 10px 0; font-size: 1.2em; color: #333; }
-    .card .content p { font-size: 0.95em; color: #555; }
-    .card .btn {
+      border: 4px solid #00c3ff;
+      margin: 20px auto;
       display: block;
-      text-align: center;
-      margin: 15px;
-      padding: 10px;
-      border-radius: 8px;
-      background: #1e90ff;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 10px 0;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 10px auto 20px;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    /* Tombol umum */
+    .btn {
+      display: block;
+      margin: 10px auto;
+      padding: 12px 20px;
+      border-radius: 30px;
+      background: rgba(0, 195, 255, 0.85);
       color: #fff;
       font-weight: bold;
       text-decoration: none;
       transition: 0.3s;
+      width: 220px;
     }
-    .card .btn:hover { background: #005bbb; }
+    .btn:hover {
+      background: #0077aa;
+      transform: scale(1.05);
+    }
 
-    /* Footer */
-    footer {
-      text-align: center;
+    /* Section konten */
+    .section {
+      display: none;
       padding: 20px;
-      background: rgba(30, 144, 255, 0.7);
-      backdrop-filter: blur(5px);
-      color: #fff;
-      margin-top: 50px;
+      margin-top: 20px;
     }
 
-    /* Animasi */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .section.active {
+      display: block;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    .card {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 15px auto;
+      max-width: 400px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card button {
+      background: #00c3ff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 25px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .card button:hover {
+      background: #0077aa;
+    }
+
+    footer {
+      margin: 30px 0 10px;
+      font-size: 0.9rem;
+      opacity: 0.7;
     }
   </style>
 </head>
 <body>
-  <!-- Video Background -->
+
+  <!-- Background Video -->
   <video autoplay muted loop class="bg-video">
-    <source src="https://files.catbox.moe/ibf8r1.mp4" type="video/mp4">
-    Browser kamu tidak mendukung video background.
+    <source src="shiroko.mp4" type="video/mp4">
   </video>
-  <div class="overlay"></div>
 
-  <header>
-    <div class="logo">Shiroko</div>
-    <nav>
-      <button class="tab-btn active" data-target="home">Home</button>
-      <button class="tab-btn" data-target="tools">Tools</button>
-      <button class="tab-btn" data-target="script">Script</button>
-      <button class="tab-btn" data-target="shop">Shop/Toko</button>
-    </nav>
-  </header>
+  <div class="container">
+    <!-- Avatar & Nama -->
+    <img src="avatar.jpg" alt="Shiroko" class="avatar">
+    <h1>Shiroko</h1>
+    <p>
+      Halo! Saya Zyxxennn membuat website modern, aplikasi ringan, dan konten kreatif. 
+      Saya suka coding, suka membantu dan pengalaman pengguna yang senang dan bisa di manfaatkan. 
+      Kalian bisa hubungi saya lewat tautan di bawah ini dan bisa dapat info tentang saya lewat channel telegram.
+    </p>
 
-  <!-- Home -->
-  <div id="home" class="tab-content active">
-    <section class="hero">
-      <img src="https://i.ibb.co/6R9Xc7z/shiroko-avatar.jpg" alt="Shiroko Avatar">
-      <h1>Shiroko</h1>
-      <p>
-        Halo! Saya Zyxxennn membuat website modern, aplikasi ringan, dan konten kreatif. 
-        Saya suka coding, suka membantu dan pengalaman pengguna yang senang dan bisa di manfaatkan. 
-        Kalian bisa hubungi saya lewat tautan di bawah ini dan bisa dapat info tentang saya lewat channel telegram.
-      </p>
-    </section>
-    <div class="social">
-      <a href="#">Saweria</a>
-      <a href="#">Telegram</a>
-      <a href="#">Channel Telegram</a>
-    </div>
-  </div>
+    <!-- Tombol Sosial -->
+    <a href="https://saweria.co/yourlink" class="btn">Saweria</a>
+    <a href="https://t.me/yourusername" class="btn">Telegram</a>
+    <a href="https://t.me/yourchannel" class="btn">Channel Telegram</a>
 
-  <!-- TOOLS -->
-  <div id="tools" class="tab-content">
-    <h2>🛠 Tools</h2>
-    <div class="cards">
+    <!-- Tombol Menu -->
+    <a href="#" class="btn" onclick="showSection('tools')">Tools</a>
+    <a href="#" class="btn" onclick="showSection('script')">Script</a>
+    <a href="#" class="btn" onclick="showSection('shop')">Shop / Toko</a>
+
+    <!-- Section Tools -->
+    <div id="tools" class="section">
       <div class="card">
-        <img src="https://i.ibb.co/0c8jM9b/tools.jpg" alt="Tools">
-        <div class="content">
-          <h3>Nama Tools</h3>
-          <p>Deskripsi singkat tools terbaru. (Bisa diisi sesuai upload baru)</p>
-        </div>
-        <a href="#" class="btn">BUKA</a>
+        <img src="tools.jpg" alt="Tools">
+        <h3>Tools Terbaru</h3>
+        <p>Fitur / tools terbaru yang kamu upload akan muncul di sini.</p>
+        <button>BUKA</button>
       </div>
     </div>
-  </div>
 
-  <!-- SCRIPT -->
-  <div id="script" class="tab-content">
-    <h2>💻 Script</h2>
-    <div class="cards">
+    <!-- Section Script -->
+    <div id="script" class="section">
       <div class="card">
-        <img src="https://i.ibb.co/fqb7r1m/script.jpg" alt="Script">
-        <div class="content">
-          <h3>Nama Script</h3>
-          <p>Deskripsi singkat script terbaru. (Bisa diisi sesuai rilis baru)</p>
-        </div>
-        <a href="#" class="btn">DOWNLOAD</a>
+        <img src="script.jpg" alt="Script">
+        <h3>Script Terbaru</h3>
+        <p>Script atau source code terbaru yang bisa diunduh.</p>
+        <button>DOWNLOAD</button>
       </div>
     </div>
-  </div>
 
-  <!-- SHOP -->
-  <div id="shop" class="tab-content">
-    <h2>🛍 Shop / Toko</h2>
-    <div class="cards">
+    <!-- Section Shop -->
+    <div id="shop" class="section">
       <div class="card">
-        <img src="https://i.ibb.co/nm5jJpR/shop.jpg" alt="Shop">
-        <div class="content">
-          <h3>Produk Baru</h3>
-          <p>Deskripsi singkat produk/jualan baru. (Bisa update foto + keterangan)</p>
-        </div>
-        <a href="https://t.me/username_owner" class="btn">BUY</a>
+        <img src="shop.jpg" alt="Shop">
+        <h3>Shop / Toko</h3>
+        <p>Produk atau jasa yang dijual langsung menuju Telegram owner.</p>
+        <button onclick="window.location.href='https://t.me/yourusername'">BUY</button>
       </div>
     </div>
-  </div>
 
-  <footer>
-    © 2025 Shiroko | Zyxxennn
-  </footer>
+    <!-- Footer -->
+    <footer>© 2025 Shiroko | Zyxxennn</footer>
+  </div>
 
   <script>
-    // Tab Navigation
-    const buttons = document.querySelectorAll(".tab-btn");
-    const contents = document.querySelectorAll(".tab-content");
-
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        // reset active
-        buttons.forEach(b => b.classList.remove("active"));
-        contents.forEach(c => c.classList.remove("active"));
-
-        // set active
-        btn.classList.add("active");
-        document.getElementById(btn.dataset.target).classList.add("active");
-      });
-    });
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: document.getElementById(id).offsetTop - 50, behavior: 'smooth' });
+    }
   </script>
+
 </body>
 </html>
