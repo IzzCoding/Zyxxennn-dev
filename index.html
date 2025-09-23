@@ -1,254 +1,206 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Shiroko | Zyxxennn — Demo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shiroko | Zyxxennn</title>
   <style>
-    /* Reset + font */
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:#000;
-      color:#fff;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
     }
 
-    /* Video background */
-    .bg-video{
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:-2;
-      filter: saturate(1.05) contrast(1.02);
-    }
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:linear-gradient(180deg, rgba(2,6,23,0.35), rgba(2,6,23,0.65));
-      z-index:-1;
-      backdrop-filter: blur(4px);
+    body, html {
+      height: 100%;
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
     }
 
-    /* Container */
-    .wrap{
-      min-height:100%;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:flex-start;
-      padding:32px 18px;
-      gap:14px;
-      text-align:center;
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
     }
 
-    /* Avatar / title / intro */
-    .avatar{
-      width:150px;height:150px;border-radius:999px;object-fit:cover;
-      border:4px solid rgba(0,195,255,0.95);
-      box-shadow:0 8px 30px rgba(0,0,0,0.6);
-    }
-    h1{font-size:2.4rem;color:#ffd86b;margin-top:8px;text-shadow:0 6px 18px rgba(0,0,0,0.55)}
-    .intro{
-      max-width:760px;color:#eef6ff;margin:10px 0 6px;line-height:1.5;font-size:1rem;
-      text-shadow:0 2px 8px rgba(0,0,0,0.45);
+    .container {
+      position: relative;
+      padding: 20px;
     }
 
-    /* Button rows */
-    .btn-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px}
-    .btn{
-      min-width:150px;padding:10px 18px;border-radius:999px;background:linear-gradient(90deg,#00c3ff,#0077ff);
-      color:#fff;text-decoration:none;font-weight:700;display:inline-flex;align-items:center;justify-content:center;
-      box-shadow:0 8px 20px rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.06);
-      transition:transform .18s ease, box-shadow .18s ease, opacity .18s;
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn.small{min-width:130px;padding:8px 14px;font-weight:600}
-    .btn.ghost{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08)}
-    .btn:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(0,0,0,0.55)}
-
-    /* MENU label */
-    .menu-title{margin-top:18px;font-weight:800;letter-spacing:2px;color:#dff1ff}
-
-    /* Sections (cards area) */
-    .sections{
-      width:100%;max-width:980px;margin-top:18px;
-      display:flex;align-items:center;justify-content:center;padding:0 12px 60px;
-    }
-    .section{display:none;width:100%}
-    .section.active{display:block;animation:fadeIn .28s ease-out}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:16px;
-    }
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.94));
-      color:#111;border-radius:14px;padding:12px;overflow:hidden;box-shadow:0 10px 30px rgba(2,6,23,0.55);
-      display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;
-    }
-    .card img{width:100%;height:150px;object-fit:cover;border-radius:8px;margin-bottom:10px}
-    .card h3{font-size:1.05rem;margin-bottom:6px}
-    .card p{font-size:0.92rem;color:#333;margin-bottom:10px;line-height:1.35}
-
-    /* action buttons inside card */
-    .card .card-btn{
-      display:inline-block;padding:10px 12px;border-radius:10px;background:#0077ff;color:#fff;text-decoration:none;font-weight:700;
-      text-align:center;border:none;cursor:pointer;
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid #00c3ff;
+      margin: 20px auto;
+      display: block;
     }
 
-    footer{margin-top:22px;opacity:0.8;font-size:0.88rem;color:#dfefff}
+    h1 {
+      font-size: 2.5rem;
+      margin: 10px 0;
+    }
 
-    /* Responsive tweaks */
-    @media (max-width:720px){
-      h1{font-size:2rem}
-      .avatar{width:130px;height:130px}
-      .btn{min-width:120px}
-      .card img{height:140px}
+    p {
+      max-width: 600px;
+      margin: 10px auto 20px;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    /* Tombol */
+    .btn {
+      display: inline-block;
+      margin: 8px;
+      padding: 12px 20px;
+      border-radius: 30px;
+      background: rgba(0, 195, 255, 0.85);
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+      min-width: 150px;
+    }
+    .btn:hover {
+      background: #0077aa;
+      transform: scale(1.05);
+    }
+
+    /* Section */
+    .section {
+      display: none;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .section.active {
+      display: block;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 15px auto;
+      max-width: 400px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .card button {
+      background: #00c3ff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 25px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .card button:hover {
+      background: #0077aa;
+    }
+
+    footer {
+      margin: 30px 0 10px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .menu-title {
+      margin-top: 25px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
   </style>
 </head>
 <body>
 
-  <!-- background video (hosted) -->
-  <video class="bg-video" autoplay muted loop playsinline>
-    <source src="https://files.catbox.moe/ibf8r1.mp4" type="video/mp4">
-    <!-- fallback color handled by overlay/body background -->
+  <!-- Background Video -->
+  <video autoplay muted loop class="bg-video">
+    <source src="https://files.catbox.moe/1p7a9d.mp4" type="video/mp4">
   </video>
-  <div class="overlay"></div>
 
-  <main class="wrap">
-    <img class="avatar" src="https://i.ibb.co/6R9Xc7z/shiroko-avatar.jpg" alt="Shiroko avatar">
+  <div class="container">
+    <!-- Avatar & Nama -->
+    <img src="https://files.catbox.moe/egvoem.jpg" alt="Shiroko" class="avatar">
     <h1>Shiroko</h1>
-    <p class="intro">Halo! Saya Zyxxennn membuat website modern, aplikasi ringan, dan konten kreatif. Saya suka coding, suka membantu dan membuat pengalaman pengguna yang menyenangkan dan berguna. Kalian bisa hubungi saya lewat tautan di bawah ini dan dapat info lewat channel Telegram.</p>
+    <p>
+      Halo! Saya Zyxxennn membuat website modern, aplikasi ringan, dan konten kreatif. 
+      Saya suka coding, suka membantu dan pengalaman pengguna yang senang dan bisa di manfaatkan. 
+      Kalian bisa hubungi saya lewat tautan di bawah ini dan bisa dapat info tentang saya lewat channel telegram.
+    </p>
 
-    <!-- Sosial row: SAWERIA | TELEGRAM | CHANNEL OWNER -->
-    <div class="btn-row" role="group" aria-label="sosial">
-      <a class="btn" href="https://saweria.co/yourlink" target="_blank" rel="noopener">SAWERIA</a>
-      <a class="btn" href="https://t.me/yourusername" target="_blank" rel="noopener">TELEGRAM</a>
-      <a class="btn" href="https://t.me/yourchannel" target="_blank" rel="noopener">CHANNEL OWNER</a>
+    <!-- Tombol Sosial -->
+    <div>
+      <a href="https://saweria.co/yourlink" class="btn">SAWERIA</a>
+      <a href="https://t.me/yourusername" class="btn">TELEGRAM</a>
+      <a href="https://t.me/yourchannel" class="btn">CHANNEL OWNER</a>
     </div>
 
-    <!-- MENU title centered -->
+    <!-- Judul MENU -->
     <div class="menu-title">MENU</div>
 
-    <!-- Menu row: TOOLS | SCRIPT | SHOP / TOKO -->
-    <div class="btn-row" role="tablist" aria-label="menu">
-      <button class="btn small" onclick="show('tools')">TOOLS</button>
-      <button class="btn small" onclick="show('script')">SCRIPT</button>
-      <button class="btn small" onclick="show('shop')">SHOP / TOKO</button>
+    <!-- Tombol Menu -->
+    <div>
+      <a href="#" class="btn" onclick="showSection('tools')">TOOLS</a>
+      <a href="#" class="btn" onclick="showSection('script')">SCRIPT</a>
+      <a href="#" class="btn" onclick="showSection('shop')">SHOP / TOKO</a>
     </div>
 
-    <!-- Sections container -->
-    <div class="sections">
-      <!-- Tools -->
-      <div id="tools" class="section">
-        <h2 style="display:none">Tools</h2>
-        <div class="cards">
-          <div class="card" aria-live="polite">
-            <img src="https://i.ibb.co/0c8jM9b/tools.jpg" alt="Tools image">
-            <div>
-              <h3>Nama Tools</h3>
-              <p>Deskripsi singkat tools terbaru. Isi dengan keterangan / instruksi singkat.</p>
-            </div>
-            <div style="margin-top:10px;text-align:center">
-              <a class="card-btn" href="#" onclick="openLink(event,'https://example.com/tools')">BUKA</a>
-            </div>
-          </div>
-
-          <!-- contoh card tambahan (copy jika mau lebih banyak) -->
-          <div class="card">
-            <img src="https://i.ibb.co/0c8jM9b/tools.jpg" alt="Tools image 2">
-            <div>
-              <h3>Tools #2</h3>
-              <p>Contoh tools lain. Ganti gambar + teks sesuai upload.</p>
-            </div>
-            <div style="margin-top:10px;text-align:center">
-              <a class="card-btn" href="#" onclick="openLink(event,'https://example.com/tools2')">BUKA</a>
-            </div>
-          </div>
-        </div>
+    <!-- Section Tools -->
+    <div id="tools" class="section">
+      <div class="card">
+        <img src="tools.jpg" alt="Tools">
+        <h3>Tools Terbaru</h3>
+        <p>Fitur / tools terbaru yang kamu upload akan muncul di sini.</p>
+        <button>BUKA</button>
       </div>
-
-      <!-- Script -->
-      <div id="script" class="section">
-        <h2 style="display:none">Script</h2>
-        <div class="cards">
-          <div class="card">
-            <img src="https://i.ibb.co/fqb7r1m/script.jpg" alt="Script image">
-            <div>
-              <h3>Nama Script</h3>
-              <p>Script atau source code terbaru. Klik DOWNLOAD untuk mengambil file.</p>
-            </div>
-            <div style="margin-top:10px;text-align:center">
-              <a class="card-btn" href="#" onclick="openLink(event,'https://example.com/script.zip')">DOWNLOAD</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Shop -->
-      <div id="shop" class="section">
-        <h2 style="display:none">Shop / Toko</h2>
-        <div class="cards">
-          <div class="card">
-            <img src="https://i.ibb.co/nm5jJpR/shop.jpg" alt="Shop image">
-            <div>
-              <h3>Produk Baru</h3>
-              <p>Produk yang sedang dijual. Tombol BUY akan langsung mengarahkan ke Telegram owner.</p>
-            </div>
-            <div style="margin-top:10px;text-align:center">
-              <a class="card-btn" href="#" onclick="openTelegram('yourusername')">BUY</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
 
+    <!-- Section Script -->
+    <div id="script" class="section">
+      <div class="card">
+        <img src="script.jpg" alt="Script">
+        <h3>Script Terbaru</h3>
+        <p>Script atau source code terbaru yang bisa diunduh.</p>
+        <button>DOWNLOAD</button>
+      </div>
+    </div>
+
+    <!-- Section Shop -->
+    <div id="shop" class="section">
+      <div class="card">
+        <img src="shop.jpg" alt="Shop">
+        <h3>Shop / Toko</h3>
+        <p>Produk atau jasa yang dijual langsung menuju Telegram owner.</p>
+        <button onclick="window.location.href='https://t.me/yourusername'">BUY</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
     <footer>© 2025 Shiroko | Zyxxennn</footer>
-  </main>
+  </div>
 
   <script>
-    // default: show nothing until user clicks, or show home (none)
-    function hideAll(){
-      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: document.getElementById(id).offsetTop - 50, behavior: 'smooth' });
     }
-    function show(id){
-      hideAll();
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.classList.add('active');
-      // scroll into view smoothly (slightly below top)
-      setTimeout(()=>{ el.scrollIntoView({behavior:'smooth',block:'start'}); }, 80);
-    }
-
-    // open link helper (prevent default if needed)
-    function openLink(e, url){
-      // if url is '#', do nothing; else open new tab
-      if(!url||url==='#'){ e && e.preventDefault(); return; }
-      window.open(url,'_blank','noopener');
-    }
-
-    // open telegram helper for BUY (redirect to owner chat)
-    function openTelegram(username){
-      if(!username) return;
-      const url = 'https://t.me/' + username;
-      window.open(url,'_blank','noopener');
-    }
-
-    // optional: keyboard nav (1 tools,2 script,3 shop)
-    window.addEventListener('keydown', (e)=>{
-      if(e.key==='1') show('tools');
-      if(e.key==='2') show('script');
-      if(e.key==='3') show('shop');
-    });
   </script>
+
 </body>
 </html>
