@@ -1,0 +1,35 @@
+<div class="cards">
+  <div class="card">
+    <img src="https://i.ibb.co/nm5jJpR/shop.jpg" alt="Produk 1">
+    <h3>Produk 1</h3>
+    <p>Harga: Rp50.000</p>
+    <button class="card-btn" onclick="buyProduct('Produk 1', 'Rp50.000')">BUY</button>
+  </div>
+
+  <div class="card">
+    <img src="https://i.ibb.co/nm5jJpR/shop.jpg" alt="Produk 2">
+    <h3>Produk 2</h3>
+    <p>Harga: Rp100.000</p>
+    <button class="card-btn" onclick="buyProduct('Produk 2', 'Rp100.000')">BUY</button>
+  </div>
+</div>
+
+<script>
+const shopOwnerChat = "@ZyxxennnCH"; // Telegram channel / chat ID
+const botToken = "MASUKKAN_TOKEN_BOT";
+
+function buyProduct(name, price) {
+  const message = `🛒 SHOP Zyxxennn\nNAMA PRODUK: ${name}\nHARGA: ${price}`;
+  fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({chat_id: shopOwnerChat, text: message, parse_mode:"Markdown"})
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.ok) alert("✅ Pesan pembelian berhasil dikirim ke owner!");
+    else alert("❌ Gagal mengirim pesan ke owner!");
+  })
+  .catch(err => alert("⚠️ Error: "+err));
+}
+</script>
