@@ -1,206 +1,188 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Shiroko | Zyxxennn</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Poppins,Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden}
+    .bg-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:-1}
 
-    body, html {
-      height: 100%;
-      color: #fff;
-      text-align: center;
-      overflow-x: hidden;
-    }
+    header{position:fixed;top:0;left:0;width:100%;padding:12px 18px;display:flex;justify-content:flex-end;z-index:20}
+    .hamburger{cursor:pointer;color:#fff}
 
-    .bg-video {
+    /* Glassmorphism Sidebar */
+    .sidebar {
       position: fixed;
       top: 0;
-      left: 0;
-      width: 100%;
+      right: -260px;
+      width: 240px;
       height: 100%;
-      object-fit: cover;
-      z-index: -1;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      padding: 60px 20px;
+      gap: 12px;
+      transition: right .3s ease;
+      z-index: 30;
     }
+    .sidebar.open{right:0}
+    .sidebar a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      padding:10px;
+      border-radius:8px;
+      transition:.3s ease;
+      box-shadow:0 0 6px rgba(0,0,0,0.2) inset;
+    }
+    .sidebar a:hover{
+      background:rgba(0,195,255,0.15);
+      box-shadow:0 0 10px rgba(0,195,255,0.7),0 0 20px rgba(0,119,255,0.5);
+    }
+    .sidebar .label{font-size:.8rem;color:#aad7ff;margin-top:16px;letter-spacing:1px}
 
-    .container {
-      position: relative;
-      padding: 20px;
-    }
+    .wrap{margin-top:70px;display:flex;flex-direction:column;align-items:center;padding:20px;text-align:center}
+    .avatar{width:150px;height:150px;border-radius:999px;border:4px solid #00c3ff;object-fit:cover}
+    h1{margin-top:10px;font-size:2rem;color:#ffd86b;text-shadow:0 3px 10px rgba(0,0,0,0.5)}
+    .intro{max-width:700px;margin:12px 0;line-height:1.5;color:#eaf6ff}
 
-    .avatar {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 4px solid #00c3ff;
-      margin: 20px auto;
-      display: block;
+    .btn-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+    .btn{
+      padding:10px 18px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#00c3ff,#0077ff);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      transition:.3s ease;
+      box-shadow:0 0 8px rgba(0,195,255,0.5);
     }
+    .btn:hover{
+      transform:translateY(-3px) scale(1.05);
+      box-shadow:0 0 16px rgba(0,195,255,0.9),0 0 30px rgba(0,119,255,0.7);
+    }
+    .menu-title{margin-top:14px;font-weight:700;letter-spacing:2px;color:#dff1ff}
 
-    h1 {
-      font-size: 2.5rem;
-      margin: 10px 0;
-    }
+    .sections{width:100%;max-width:900px;margin-top:16px;padding-bottom:60px}
+    .section{display:none}
+    .section.active{display:block;animation:fadeIn .3s ease-out}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-    p {
-      max-width: 600px;
-      margin: 10px auto 20px;
-      line-height: 1.6;
-      font-size: 1rem;
-    }
-
-    /* Tombol */
-    .btn {
-      display: inline-block;
-      margin: 8px;
-      padding: 12px 20px;
-      border-radius: 30px;
-      background: rgba(0, 195, 255, 0.85);
-      color: #fff;
-      font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s;
-      min-width: 150px;
-    }
-    .btn:hover {
-      background: #0077aa;
-      transform: scale(1.05);
-    }
-
-    /* Section */
-    .section {
-      display: none;
-      padding: 20px;
-      margin-top: 20px;
-    }
-    .section.active {
-      display: block;
-    }
-
-    .card {
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 15px;
-      padding: 20px;
-      margin: 15px auto;
-      max-width: 400px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    }
-    .card img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-    .card button {
-      background: #00c3ff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 25px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .card button:hover {
-      background: #0077aa;
-    }
-
-    footer {
-      margin: 30px 0 10px;
-      font-size: 0.9rem;
-      opacity: 0.7;
-    }
-
-    .menu-title {
-      margin-top: 25px;
-      font-size: 1.3rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .card{background:#fff;color:#111;border-radius:14px;padding:12px;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
+    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px}
+    .card h3{margin-bottom:6px}
+    .card p{margin-bottom:10px;font-size:.9rem}
+    .card .card-btn{display:inline-block;padding:8px 12px;background:#0077ff;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;transition:.3s}
+    .card .card-btn:hover{
+      box-shadow:0 0 12px rgba(0,195,255,0.8),0 0 25px rgba(0,119,255,0.6);
     }
   </style>
 </head>
 <body>
-
-  <!-- Background Video -->
-  <video autoplay muted loop class="bg-video">
+  <video class="bg-video" autoplay muted loop playsinline>
     <source src="https://files.catbox.moe/1p7a9d.mp4" type="video/mp4">
   </video>
+  <div class="overlay"></div>
 
-  <div class="container">
-    <!-- Avatar & Nama -->
-    <img src="https://files.catbox.moe/egvoem.jpg" alt="Shiroko" class="avatar">
+  <!-- header -->
+  <header>
+    <div class="hamburger" onclick="toggleMenu()">
+      <i data-lucide="menu"></i>
+    </div>
+  </header>
+
+  <!-- sidebar -->
+  <nav id="sidebar" class="sidebar">
+    <a href="#" onclick="goHome()"><i data-lucide="home"></i> HOME</a>
+    <a href="#" onclick="showSection('tools')"><i data-lucide="wrench"></i> TOOLS</a>
+    <a href="#" onclick="showSection('script')"><i data-lucide="file-code-2"></i> SCRIPT</a>
+    <a href="#" onclick="showSection('shop')"><i data-lucide="shopping-cart"></i> SHOP / TOKO</a>
+    <div class="label">MENU MEDIA SOSIAL</div>
+    <a href="https://t.me/yourusername" target="_blank"><i data-lucide="send"></i> TELEGRAM</a>
+    <a href="https://t.me/yourchannel" target="_blank"><i data-lucide="rss"></i> CHANNEL TELEGRAM</a>
+  </nav>
+
+  <main class="wrap">
+    <img class="avatar" src="https://files.catbox.moe/egvoem.jpg" alt="Shiroko">
     <h1>Shiroko</h1>
-    <p>
-      Halo! Saya Zyxxennn membuat website modern, aplikasi ringan, dan konten kreatif. 
-      Saya suka coding, suka membantu dan pengalaman pengguna yang senang dan bisa di manfaatkan. 
-      Kalian bisa hubungi saya lewat tautan di bawah ini dan bisa dapat info tentang saya lewat channel telegram.
-    </p>
+    <p class="intro">Halo! Saya Zyxxennn membuat website modern, aplikasi ringan, dan konten kreatif. Saya suka coding, suka membantu dan membuat pengalaman pengguna yang menyenangkan. Kalian bisa hubungi saya lewat tautan di bawah ini.</p>
 
-    <!-- Tombol Sosial -->
-    <div>
-      <a href="https://saweria.co/yourlink" class="btn">SAWERIA</a>
-      <a href="https://t.me/yourusername" class="btn">TELEGRAM</a>
-      <a href="https://t.me/yourchannel" class="btn">CHANNEL OWNER</a>
+    <div class="btn-row">
+      <a class="btn" href="https://saweria.co/yourlink" target="_blank">SAWERIA</a>
+      <a class="btn" href="https://t.me/yourusername" target="_blank">TELEGRAM</a>
+      <a class="btn" href="https://t.me/yourchannel" target="_blank">CHANNEL OWNER</a>
     </div>
 
-    <!-- Judul MENU -->
     <div class="menu-title">MENU</div>
-
-    <!-- Tombol Menu -->
-    <div>
-      <a href="#" class="btn" onclick="showSection('tools')">TOOLS</a>
-      <a href="#" class="btn" onclick="showSection('script')">SCRIPT</a>
-      <a href="#" class="btn" onclick="showSection('shop')">SHOP / TOKO</a>
+    <div class="btn-row">
+      <button class="btn" onclick="showSection('tools')">TOOLS</button>
+      <button class="btn" onclick="showSection('script')">SCRIPT</button>
+      <button class="btn" onclick="showSection('shop')">SHOP / TOKO</button>
     </div>
 
-    <!-- Section Tools -->
-    <div id="tools" class="section">
-      <div class="card">
-        <img src="tools.jpg" alt="Tools">
-        <h3>Tools Terbaru</h3>
-        <p>Fitur / tools terbaru yang kamu upload akan muncul di sini.</p>
-        <button>BUKA</button>
+    <!-- Sections -->
+    <div class="sections">
+      <div id="tools" class="section">
+        <div class="cards">
+          <div class="card">
+            <img src="https://i.ibb.co/0c8jM9b/tools.jpg" alt="tools">
+            <h3>Nama Tools</h3>
+            <p>Deskripsi singkat tools terbaru.</p>
+            <a class="card-btn" href="#">BUKA</a>
+          </div>
+        </div>
+      </div>
+      <div id="script" class="section">
+        <div class="cards">
+          <div class="card">
+            <img src="https://i.ibb.co/fqb7r1m/script.jpg" alt="script">
+            <h3>Nama Script</h3>
+            <p>Script terbaru untuk diunduh.</p>
+            <a class="card-btn" href="#">DOWNLOAD</a>
+          </div>
+        </div>
+      </div>
+      <div id="shop" class="section">
+        <div class="cards">
+          <div class="card">
+            <img src="https://i.ibb.co/nm5jJpR/shop.jpg" alt="shop">
+            <h3>Produk Baru</h3>
+            <p>Produk yang sedang dijual.</p>
+            <a class="card-btn" href="https://t.me/yourusername" target="_blank">BUY</a>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Section Script -->
-    <div id="script" class="section">
-      <div class="card">
-        <img src="script.jpg" alt="Script">
-        <h3>Script Terbaru</h3>
-        <p>Script atau source code terbaru yang bisa diunduh.</p>
-        <button>DOWNLOAD</button>
-      </div>
-    </div>
-
-    <!-- Section Shop -->
-    <div id="shop" class="section">
-      <div class="card">
-        <img src="shop.jpg" alt="Shop">
-        <h3>Shop / Toko</h3>
-        <p>Produk atau jasa yang dijual langsung menuju Telegram owner.</p>
-        <button onclick="window.location.href='https://t.me/yourusername'">BUY</button>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>© 2025 Shiroko | Zyxxennn</footer>
-  </div>
+  </main>
 
   <script>
-    function showSection(id) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      window.scrollTo({ top: document.getElementById(id).offsetTop - 50, behavior: 'smooth' });
+    const sidebar=document.getElementById('sidebar');
+    function toggleMenu(){sidebar.classList.toggle('open')}
+    function closeMenu(){sidebar.classList.remove('open')}
+    function goHome(){
+      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+      closeMenu();
+      window.scrollTo({top:0,behavior:'smooth'});
     }
+    function showSection(id){
+      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      closeMenu();
+      setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:'smooth'});},100);
+    }
+    // init icons
+    lucide.createIcons();
   </script>
-
 </body>
 </html>
