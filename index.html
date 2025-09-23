@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shiroko | Zyxxennn</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f4ff, #ffffff);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      background: #1e90ff;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+    .hero img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      border: 4px solid #1e90ff;
+      animation: float 3s ease-in-out infinite;
+    }
+    .hero h1 {
+      font-size: 2.5em;
+      margin: 10px 0;
+      color: #1e90ff;
+    }
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 1.1em;
+      line-height: 1.6em;
+      color: #444;
+    }
+
+    /* Social Links */
+    .social {
+      margin: 40px auto;
+      text-align: center;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+    .social a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
+      border-radius: 30px;
+      background: #1e90ff;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .social a:hover {
+      background: #005bbb;
+      transform: scale(1.05);
+    }
+
+    /* Section */
+    section {
+      padding: 50px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2em;
+      color: #1e90ff;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .card .content {
+      padding: 15px;
+    }
+    .card .content h3 {
+      margin: 10px 0;
+      font-size: 1.2em;
+      color: #333;
+    }
+    .card .content p {
+      font-size: 0.95em;
+      color: #555;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #1e90ff;
+      color: #fff;
+      margin-top: 50px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Responsive Nav */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background: #1e90ff;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        padding: 15px;
+      }
+      nav.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+        cursor: pointer;
+      }
+    }
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Shiroko</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="navbar">
+      <a href="#home">Home</a>
+      <a href="#tools">Tools</a>
+      <a href="#script">Script</a>
+      <a href="#shop">Shop/Toko</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <img src="https://i.ibb.co/6R9Xc7z/shiroko-avatar.jpg" alt="Shiroko Avatar">
+    <h1>Shiroko</h1>
+    <p>
+      Halo! Saya Zyxxennn membuat website modern, aplikasi ringan, dan konten kreatif. 
+      Saya suka coding, suka membantu dan pengalaman pengguna yang senang dan bisa di manfaatkan. 
+      Kalian bisa hubungi saya lewat tautan di bawah ini dan bisa dapat info tentang saya lewat channel telegram.
+    </p>
+  </section>
+
+  <div class="social">
+    <a href="#">Saweria</a>
+    <a href="#">Telegram</a>
+    <a href="#">Channel Telegram</a>
+  </div>
+
+  <section id="tools">
+    <h2>🛠 Tools</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://i.ibb.co/0c8jM9b/tools.jpg" alt="Tools">
+        <div class="content">
+          <h3>Nama Tools</h3>
+          <p>Deskripsi singkat tools terbaru. (Bisa diisi sesuai upload baru)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="script">
+    <h2>💻 Script</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://i.ibb.co/fqb7r1m/script.jpg" alt="Script">
+        <div class="content">
+          <h3>Nama Script</h3>
+          <p>Deskripsi singkat script terbaru. (Bisa diisi sesuai rilis baru)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="shop">
+    <h2>🛍 Shop / Toko</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://i.ibb.co/nm5jJpR/shop.jpg" alt="Shop">
+        <div class="content">
+          <h3>Produk Baru</h3>
+          <p>Deskripsi singkat produk/jualan baru. (Bisa update foto + keterangan)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Shiroko | Zyxxennn
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navbar').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
