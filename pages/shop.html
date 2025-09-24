@@ -1,35 +1,64 @@
-<div class="cards">
-  <div class="card">
-    <img src="https://i.ibb.co/nm5jJpR/shop.jpg" alt="Produk 1">
-    <h3>Produk 1</h3>
-    <p>Harga: Rp50.000</p>
-    <button class="card-btn" onclick="buyProduct('Produk 1', 'Rp50.000')">BUY</button>
-  </div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - Zyxxennn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <header class="bg-purple-600 text-white p-4 text-center font-bold text-xl">
+    SHOP Zyxxennn
+  </header>
 
-  <div class="card">
-    <img src="https://i.ibb.co/nm5jJpR/shop.jpg" alt="Produk 2">
-    <h3>Produk 2</h3>
-    <p>Harga: Rp100.000</p>
-    <button class="card-btn" onclick="buyProduct('Produk 2', 'Rp100.000')">BUY</button>
-  </div>
-</div>
+  <main class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Produk 1 -->
+    <div class="bg-white shadow-md rounded-lg overflow-hidden p-4 text-center">
+      <img src="https://files.catbox.moe/egvoem.jpg" 
+           alt="Produk 1" 
+           class="mx-auto w-32 h-32 object-cover rounded-md mb-4">
+      <h3 class="font-bold text-lg">Nama Produk 1</h3>
+      <p class="text-gray-600 text-sm mb-2">Informasi singkat tentang produk ini.</p>
+      <p class="font-semibold mb-4">Harga: Rp50.000</p>
+      <button 
+        onclick="buyProduct('Nama Produk 1', 'Rp50.000')" 
+        class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+        BUY
+      </button>
+    </div>
 
-<script>
-const shopOwnerChat = "@ZyxxennnCH"; // Telegram channel / chat ID
-const botToken = "MASUKKAN_TOKEN_BOT";
+    <!-- Produk 2 -->
+    <div class="bg-white shadow-md rounded-lg overflow-hidden p-4 text-center">
+      <img src="https://files.catbox.moe/d4frow.jpg" 
+           alt="Produk 2" 
+           class="mx-auto w-32 h-32 object-cover rounded-md mb-4">
+      <h3 class="font-bold text-lg">Nama Produk 2</h3>
+      <p class="text-gray-600 text-sm mb-2">Deskripsi singkat produk kedua.</p>
+      <p class="font-semibold mb-4">Harga: Rp75.000</p>
+      <button 
+        onclick="buyProduct('Nama Produk 2', 'Rp75.000')" 
+        class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+        BUY
+      </button>
+    </div>
+  </main>
 
-function buyProduct(name, price) {
-  const message = `🛒 SHOP Zyxxennn\nNAMA PRODUK: ${name}\nHARGA: ${price}`;
-  fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({chat_id: shopOwnerChat, text: message, parse_mode:"Markdown"})
-  })
-  .then(res => res.json())
-  .then(data => {
-    if(data.ok) alert("✅ Pesan pembelian berhasil dikirim ke owner!");
-    else alert("❌ Gagal mengirim pesan ke owner!");
-  })
-  .catch(err => alert("⚠️ Error: "+err));
-}
-</script>
+  <script>
+    async function buyProduct(nama, harga) {
+      // Arahkan user langsung ke Telegram owner
+      window.open("https://t.me/Zyxxennn", "_blank");
+
+      // Kirim notifikasi ke backend (bot Telegram)
+      try {
+        await fetch("/api/buy", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ product: nama, price: harga })
+        });
+      } catch (err) {
+        console.error("Gagal kirim notifikasi ke bot:", err);
+      }
+    }
+  </script>
+</body>
+</html>
