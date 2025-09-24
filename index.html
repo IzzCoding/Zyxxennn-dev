@@ -9,13 +9,13 @@
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Poppins,Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden}
     .bg-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:-1}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:10;opacity:0;pointer-events:none;transition:opacity .3s;}
+    .overlay.active{opacity:1;pointer-events:auto;}
 
     header{
       position:fixed;
       top:0;
-      right:0; /* header di kanan atas */
-      width:auto;
+      right:0;
       padding:12px 18px;
       display:flex;
       justify-content:flex-end;
@@ -30,7 +30,7 @@
     .sidebar {
       position: fixed;
       top:0;
-      right:-260px; /* sidebar awal di luar layar kanan */
+      right:-260px;
       width:240px;
       height:100%;
       background: rgba(255, 255, 255, 0.08);
@@ -74,7 +74,7 @@
   <video class="bg-video" autoplay muted loop playsinline>
     <source src="https://files.catbox.moe/1p7a9d.mp4" type="video/mp4">
   </video>
-  <div class="overlay"></div>
+  <div class="overlay" id="overlay"></div>
 
   <header>
     <div class="hamburger" id="hamburger">
@@ -137,22 +137,29 @@
   </main>
 
   <script>
-    const sidebar=document.getElementById('sidebar');
-    const hamburger=document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const hamburger = document.getElementById('hamburger');
+    const overlay = document.getElementById('overlay');
 
-    hamburger.addEventListener('click', function() {
+    function toggleMenu(){
       sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+
       const icon = hamburger.querySelector('i');
       if(sidebar.classList.contains('open')){
-        icon.setAttribute('data-lucide','x'); // ikon silang
+        icon.setAttribute('data-lucide','x');
       } else {
-        icon.setAttribute('data-lucide','menu'); // ikon menu
+        icon.setAttribute('data-lucide','menu');
       }
       lucide.createIcons();
-    });
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
 
     function closeMenu(){
       sidebar.classList.remove('open');
+      overlay.classList.remove('active');
       hamburger.querySelector('i').setAttribute('data-lucide','menu');
       lucide.createIcons();
     }
@@ -184,7 +191,7 @@
     const botToken="MASUKKAN_TOKEN_BOT";
     const chatId="@ZyxxennnCH";
 
-    document.getElementById('sendBtn').addEventListener('click',async function(){
+    document.getElementById('sendBtn').addEventListener('click', async function(){
       const nameInput=document.getElementById('name');
       const messageInput=document.getElementById('message');
       const statusDiv=document.getElementById('status');
