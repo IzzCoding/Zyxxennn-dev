@@ -4,65 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shop - Zyxxennn</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../public/style.css">
 </head>
-<body class="bg-gray-100 font-sans">
-  <!-- Header -->
-  <header class="bg-purple-600 text-white p-4 text-center font-bold text-xl">
-    🛒 SHOP Zyxxennn
-  </header>
+<body>
+  <header class="header">SHOP / TOKO</header>
 
-  <!-- Produk -->
-  <main class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <main class="cards">
     <!-- Produk 1 -->
-    <div class="bg-white shadow-md rounded-lg overflow-hidden">
-      <img src="https://files.catbox.moe/df3nvs.jpg" alt="Produk 1" class="w-32 h-32 object-cover">
-      <div class="p-4">
-        <h3 class="font-bold text-lg mb-2">Website Generator</h3>
-        <p class="text-gray-600 mb-1">💰 Harga: Rp 50.000</p>
-        <p class="text-gray-600 mb-4 text-sm">
-          Alat untuk membuat website otomatis hanya dengan upload file HTML.
-        </p>
-        <a class="inline-block px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-           href="https://t.me/Zyxxennn"
-           target="_blank"
-           onclick="notifyBot('Website Generator','Rp 50.000')">
-           BUY
-        </a>
-      </div>
+    <div class="card">
+      <img src="https://files.catbox.moe/df3nvs.jpg" alt="Produk 1">
+      <h3>Website Generator</h3>
+      <p class="price">Rp 50.000</p>
+      <p>Membuat website otomatis dari HTML, cepat & modern.</p>
+      <a class="card-btn" 
+         href="https://t.me/Zyxxennn" 
+         target="_blank"
+         onclick="notifyBot('Website Generator','Rp 50.000')">
+        BUY
+      </a>
     </div>
 
     <!-- Produk 2 -->
-    <div class="bg-white shadow-md rounded-lg overflow-hidden">
-      <img src="https://files.catbox.moe/lk81d0.jpg" alt="Produk 2" class="w-full h-32 object-cover">
-      <div class="p-4">
-        <h3 class="font-bold text-lg mb-2">Scanner Link</h3>
-        <p class="text-gray-600 mb-1">💰 Harga: Rp 30.000</p>
-        <p class="text-gray-600 mb-4 text-sm">
-          Tools untuk mendeteksi keamanan link sebelum dikunjungi.
-        </p>
-        <a class="inline-block px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-           href="https://t.me/Zyxxennn"
-           target="_blank"
-           onclick="notifyBot('Scanner Link','Rp 30.000')">
-           BUY
-        </a>
-      </div>
+    <div class="card">
+      <img src="https://files.catbox.moe/lk81d0.jpg" alt="Produk 2">
+      <h3>Scanner Link</h3>
+      <p class="price">Rp 30.000</p>
+      <p>Mendeteksi keamanan link website, anti phising.</p>
+      <a class="card-btn" 
+         href="https://t.me/Zyxxennn" 
+         target="_blank"
+         onclick="notifyBot('Scanner Link','Rp 30.000')">
+        BUY
+      </a>
     </div>
   </main>
 
-  <script>
-    function notifyBot(productName, productPrice) {
-      fetch(`https://api.telegram.org/botTOKEN_ANDA/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: "CHAT_ID_OWNER",
-          text: `🛒 Produk Dibeli!\n📦 ${productName}\n💰 ${productPrice}`,
-          parse_mode: "Markdown"
-        })
-      }).catch(err => console.error("Gagal kirim notifikasi:", err));
-    }
-  </script>
+  <a class="card-btn"
+   href="https://t.me/Zyxxennn"
+   target="_blank"
+   onclick="notifyBot('Website Generator','Rp 50.000')">
+   BUY
+</a>
+
+<script>
+function notifyBot(productName, productPrice) {
+  fetch(https://api.telegram.org/8330143062:AAGIYPE3ssRG-2-HiOkwlvP2AG7mtoGkgQ8/sendMessage, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: "8447173769",
+      text: 🛒 Produk Dibeli!\n📦 ${productName}\n💰 ${productPrice},
+      parse_mode: "Markdown"
+    })
+  });
+}
+</script>
 </body>
 </html>
