@@ -21,11 +21,11 @@ Harga: Rp75.000</p>
   <script>
     function buyProduct(nama, harga) {
       // 1️⃣ Redirect langsung ke Telegram Owner
-      window.open("https://t.me/yourusername", "_blank");
+      window.open("https://t.me/Zyxxennn", "_blank");
 
       // 2️⃣ Kirim notifikasi ke Bot Telegram → Owner
-      const botToken = "MASUKKAN_TOKEN_BOT";
-      const chatId = "MASUKKAN_CHAT_ID_OWNER";
+      const botToken = "8330143062:AAGIYPE3ssRG-2-HiOkwlvP2AG7mtoGkgQ8";
+      const chatId = "8447173769";
       const pesan = `🛒 Notifikasi Pembelian\n\nProduk: ${nama}\nHarga: ${harga}\nStatus: BUY diklik oleh pengguna.`;
 
       fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
