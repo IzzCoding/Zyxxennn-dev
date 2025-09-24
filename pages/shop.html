@@ -39,14 +39,25 @@
     </div>
   </main>
 
-  <script>
-    function notifyBot(productName, productPrice) {
-      fetch("/api/notify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productName, productPrice })
-      });
-    }
-  </script>
+  <a class="card-btn"
+   href="https://t.me/username"
+   target="_blank"
+   onclick="notifyBot('Website Generator','Rp 50.000')">
+   BUY
+</a>
+
+<script>
+function notifyBot(productName, productPrice) {
+  fetch(`https://api.telegram.org/botTOKEN_ANDA/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: "CHAT_ID_OWNER",
+      text: `🛒 Produk Dibeli!\n📦 ${productName}\n💰 ${productPrice}`,
+      parse_mode: "Markdown"
+    })
+  });
+}
+</script>
 </body>
 </html>
