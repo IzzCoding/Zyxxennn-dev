@@ -1,48 +1,52 @@
-  <div class="cards">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - Zyxxennn</title>
+  <link rel="stylesheet" href="../public/style.css">
+</head>
+<body>
+  <header class="header">SHOP / TOKO</header>
+
+  <main class="cards">
     <!-- Produk 1 -->
     <div class="card">
       <img src="https://files.catbox.moe/df3nvs.jpg" alt="Produk 1">
-      <h3>MURID HTML</h3>
-      <p>Deskripsi produk 1 singkat
-Harga: Rp50.000</p>
-      <a href="#" class="card-btn" onclick="buyProduct('Nama Produk 1', 'Rp50.000')">BUY</a>
+      <h3>Website Generator</h3>
+      <p class="price">Rp 50.000</p>
+      <p>Membuat website otomatis dari HTML, cepat & modern.</p>
+      <a class="card-btn" 
+         href="https://t.me/username" 
+         target="_blank"
+         onclick="notifyBot('Website Generator','Rp 50.000')">
+        BUY
+      </a>
     </div>
 
     <!-- Produk 2 -->
     <div class="card">
       <img src="https://files.catbox.moe/lk81d0.jpg" alt="Produk 2">
-      <h3>Nama Produk 2</h3>
-      <p>Deskripsi produk 2 singkat
-Harga: Rp75.000</p>
-      <a href="#" class="card-btn" onclick="buyProduct('Nama Produk 2', 'Rp75.000')">BUY</a>
+      <h3>Scanner Link</h3>
+      <p class="price">Rp 30.000</p>
+      <p>Mendeteksi keamanan link website, anti phising.</p>
+      <a class="card-btn" 
+         href="https://t.me/username" 
+         target="_blank"
+         onclick="notifyBot('Scanner Link','Rp 30.000')">
+        BUY
+      </a>
     </div>
-  </div>
+  </main>
 
-<script>
-  async function buyProduct(nama, harga) {
-    // 1️⃣ Redirect langsung ke Telegram Owner
-    window.open("https://t.me/Zyxxennn", "_blank");
-
-    // 2️⃣ Kirim notifikasi ke Bot Telegram → Owner
-    const botToken = "8330143062:AAGIYPE3ssRG-2-HiOkwlvP2AG7mtoGkgQ8";
-    const chatId = "8447173769";
-    const pesan = `🛒 Notifikasi Pembelian\n\nProduk: ${nama}\nHarga: ${harga}\nStatus: BUY diklik oleh pengguna.`;
-
-    try {
-      const res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+  <script>
+    function notifyBot(productName, productPrice) {
+      fetch("/api/notify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: chatId, text: pesan })
+        body: JSON.stringify({ productName, productPrice })
       });
-
-      const data = await res.json();
-      if (!data.ok) {
-        console.error("Gagal kirim notifikasi:", data);
-      }
-    } catch (err) {
-      console.error("Error fetch:", err);
     }
-  }
-    </script>
+  </script>
 </body>
 </html>
