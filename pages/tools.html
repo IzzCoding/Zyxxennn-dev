@@ -5,71 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tools - Zyxxennn</title>
   <link rel="stylesheet" href="../public/style.css">
+</head>
+<body>
+  <h2 class="header">MENU TOOLS</h2>
   <style>
-    /* Latar belakang biru full-screen dengan efek transparan */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: rgba(0, 0, 255, 0.5); /* biru transparan */
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      backdrop-filter: blur(5px); /* sedikit blur pada latar belakang */
-    }
+    h2{
+    position: fixed;
+    top: 0;
+    right: 0; /* geser ke kanan */
+    width: auto; /* bisa sesuaikan */
+    padding: 12px 18px;
+    display: flex;
+    justify-content: flex-end; /* tombol di pojok kanan */
+    z-index: 20;
+  }
+  </style>
 
-    h2 {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 12px 18px;
-      background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 8px;
-      z-index: 20;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    }
+  <main class="cards">
 
-    main.cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 120px 20px 20px 20px; /* beri ruang untuk header */
-      width: 100%;
-      box-sizing: border-box;
-    }
+<div class="cards">
+  <div class="card">
+    <img src="https://files.catbox.moe/a5fv6a.png" alt="Tools 1">
+    <h3>CRATE WEBSITE</h3>
+    <p>Fungsi tools
+    mmengubah file html menjadi website otomatis tidak boleh mengandung konten ilegal dan phising.    </p>
+    <a class="card-btn" href="tools/crate-website.html" target="_blank">BUKA TOOLS</a>
+  </div>
 
-    .card {
-      background-color: rgba(255, 255, 255, 0.3); /* semi-transparan */
-      backdrop-filter: blur(10px); /* blur di belakang kartu */
-      padding: 20px;
-      border-radius: 15px;
-      width: 260px;
-      text-align: center;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 20px rgba(0,0,0,0.4);
-    }
-
-    .card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-
-    .card-btn {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 10px 18px;
-      background-color: #007bff;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
+  <div class="card">
+    <img src="https://files.catbox.moe/a5fv6a.png" alt="Tools 2">
+    <h3>SCANNER LINK</h3>
+    <p>Fungsi tools
+      untuk mendeteksi keamanan link. 
+    </p>
+    <a class="card-btn" href="tools/scanner-link.html" target="_blank">BUKA TOOLS</a>
+  </div>
+  
+  <div class="cards">
+  <div class="card">
+    <img src="https://files.catbox.moe/a5fv6a.png" alt="Tools 1">
+    <h3>IQC IPHONE</h3>
+    <p>Fungsi tools
+      untuk membuat quote/chat iphone.
+    </p>
+    <a class="card-btn" href="tools/iqc-iphone.html" target="_blank">BUKA TOOLS</a>
+  </div>
+</div>      border-radius: 8px;
       transition: background-color 0.3s;
     }
 
