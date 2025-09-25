@@ -5,49 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tools - Zyxxennn</title>
   <link rel="stylesheet" href="../public/style.css">
+  <style>
+    /* Latar belakang biru transparan */
+    body {
+      background-color: rgba(0, 0, 255, 0.5); /* biru transparan 50% */
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    h2{
+      position: fixed;
+      top: 0;
+      right: 0; /* geser ke kanan */
+      width: auto;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: flex-end; /* tombol di pojok kanan */
+      z-index: 20;
+      background-color: rgba(255, 255, 255, 0.8); /* sedikit latar putih supaya teks jelas */
+      border-radius: 5px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 80px 20px 20px 20px; /* beri ruang untuk header */
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.9); /* latar kartu sedikit transparan */
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .card-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .card-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
   <h2 class="header">MENU TOOLS</h2>
-  <style>
-    h2{
-    position: fixed;
-    top: 0;
-    right: 0; /* geser ke kanan */
-    width: auto; /* bisa sesuaikan */
-    padding: 12px 18px;
-    display: flex;
-    justify-content: flex-end; /* tombol di pojok kanan */
-    z-index: 20;
-  }
-  </style>
 
   <main class="cards">
+    <div class="card">
+      <img src="https://files.catbox.moe/a5fv6a.png" alt="Tools 1">
+      <h3>CRATE WEBSITE</h3>
+      <p>Fungsi tools mengubah file html menjadi website otomatis tidak boleh mengandung konten ilegal dan phising.</p>
+      <a class="card-btn" href="tools/crate-website.html" target="_blank">BUKA TOOLS</a>
+    </div>
 
-<div class="cards">
-  <div class="card">
-    <img src="https://files.catbox.moe/a5fv6a.png" alt="Tools 1">
-    <h3>CRATE WEBSITE</h3>
-    <p>Fungsi tools
-    mmengubah file html menjadi website otomatis tidak boleh mengandung konten ilegal dan phising.    </p>
-    <a class="card-btn" href="tools/crate-website.html" target="_blank">BUKA TOOLS</a>
-  </div>
+    <div class="card">
+      <img src="https://files.catbox.moe/a5fv6a.png" alt="Tools 2">
+      <h3>SCANNER LINK</h3>
+      <p>Fungsi tools untuk mendeteksi keamanan link.</p>
+      <a class="card-btn" href="tools/scanner-link.html" target="_blank">BUKA TOOLS</a>
+    </div>
 
-  <div class="card">
-    <img src="https://files.catbox.moe/a5fv6a.png" alt="Tools 2">
-    <h3>SCANNER LINK</h3>
-    <p>Fungsi tools
-      untuk mendeteksi keamanan link. 
-    </p>
-    <a class="card-btn" href="tools/scanner-link.html" target="_blank">BUKA TOOLS</a>
-  </div>
-  
-  <div class="cards">
-  <div class="card">
-    <img src="https://files.catbox.moe/a5fv6a.png" alt="Tools 1">
-    <h3>IQC IPHONE</h3>
-    <p>Fungsi tools
-      untuk membuat quote/chat iphone.
-    </p>
-    <a class="card-btn" href="tools/iqc-iphone.html" target="_blank">BUKA TOOLS</a>
-  </div>
-</div>
+    <div class="card">
+      <img src="https://files.catbox.moe/a5fv6a.png" alt="Tools 3">
+      <h3>IQC IPHONE</h3>
+      <p>Fungsi tools untuk membuat quote/chat iphone.</p>
+      <a class="card-btn" href="tools/iqc-iphone.html" target="_blank">BUKA TOOLS</a>
+    </div>
+  </main>
+</body>
+</html>
