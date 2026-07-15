@@ -1,182 +1,617 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Shiroko | Zyxxennn</title>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Poppins,Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden}
-    .bg-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:-1}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gacha Nokos · Dapatkan Nomor Asli</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Header & Hamburger */
-    header{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      padding:12px 18px;
-      display:flex;
-      justify-content:flex-start;
-      z-index:20;
-    }
-    .hamburger{
-      cursor:pointer;
-      color:#fff;
-      font-size:28px;
-    }
+        :root {
+            --primary: #ff2a2a;
+            --primary-dark: #b30000;
+            --primary-glow: rgba(255, 50, 50, 0.6);
+            --bg-dark: #03050a;
+            --text-soft: #d0d8e5;
+            --text-muted: #8a95b0;
+            --border-glow: rgba(255, 60, 60, 0.4);
+            --shadow-heavy: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+            --shadow-glow: 0 0 30px rgba(255, 40, 40, 0.2);
+            --font-main: 'Inter', sans-serif;
+            --font-display: 'Orbitron', sans-serif;
+            --success: #4caf50;
+        }
 
-    /* Sidebar */
-    .sidebar{
-      position: fixed;
-      top:0;
-      left:-260px;
-      width:240px;
-      height:100%;
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border-right:1px solid rgba(255,255,255,0.2);
-      display:flex;
-      flex-direction:column;
-      padding:60px 20px;
-      gap:12px;
-      transition:left .3s ease;
-      z-index:30;
-    }
-    .sidebar.open{left:0}
-    .sidebar a{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:600;padding:10px;border-radius:8px;transition:.3s ease;box-shadow:0 0 6px rgba(0,0,0,0.2) inset}
-    .sidebar a:hover{background:rgba(0,195,255,0.15);box-shadow:0 0 10px rgba(0,195,255,0.7),0 0 20px rgba(0,119,255,0.5);}
-    .sidebar .label{font-size:.8rem;color:#aad7ff;margin-top:16px;letter-spacing:1px}
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 40, 40, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(200, 30, 30, 0.12) 0%, transparent 40%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-    /* Main Content */
-    .wrap{margin-top:70px;display:flex;flex-direction:column;align-items:center;padding:20px;text-align:center}
-    .avatar{width:150px;height:150px;border-radius:999px;border:4px solid #00c3ff;object-fit:cover}
-    h1{margin-top:10px;font-size:2rem;color:#ffd86b;text-shadow:0 3px 10px rgba(0,0,0,0.5)}
-    .intro{max-width:700px;margin:12px 0;line-height:1.5;color:#eaf6ff}
-    .btn-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:8px 0}
-    .btn{padding:10px 18px;border-radius:999px;background:linear-gradient(90deg,#00c3ff,#0077ff);color:#fff;text-decoration:none;font-weight:700;transition:.3s ease;box-shadow:0 0 8px rgba(0,195,255,0.5);}
-    .btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 16px rgba(0,195,255,0.9),0 0 30px rgba(0,119,255,0.7);}
-    .menu-title{margin-top:14px;font-weight:700;letter-spacing:2px;color:#dff1ff}
-    .sections{width:100%;max-width:900px;margin-top:16px;padding-bottom:60px}
-    .section{display:none}
-    .section.active{display:block;animation:fadeIn .3s ease-out}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(8, 12, 22, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            border-radius: 40px;
+            padding: 35px 28px;
+            box-shadow: var(--shadow-heavy), var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* Card Styles */
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
-    .card{background:#fff;color:#111;border-radius:14px;padding:12px;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
-    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px}
-    .card h3, .card h2{margin-bottom:6px}
-    .card p{margin-bottom:10px;font-size:.9rem}
-    .card .card-btn{display:inline-block;padding:8px 12px;background:#0077ff;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;transition:.3s}
-    .card .card-btn:hover{box-shadow:0 0 12px rgba(0,195,255,0.8),0 0 25px rgba(0,119,255,0.6);}
-  </style>
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255, 60, 60, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+            animation: pulseIcon 2s infinite;
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header h1 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #ffffff, #ff6a6a, #ff2a2a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 6px;
+        }
+
+        /* ===== STATUS BAR ===== */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 10px 16px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 70, 70, 0.15);
+            position: relative;
+            z-index: 2;
+        }
+
+        .status-item {
+            text-align: center;
+        }
+
+        .status-item .number {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ff6a6a;
+        }
+
+        .status-item .label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== BOX GACHA ===== */
+        .gacha-box {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 24px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 70, 70, 0.3);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gacha-number {
+            font-family: var(--font-display);
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(255, 50, 50, 0.5);
+            transition: 0.3s;
+        }
+
+        .gacha-number.spinning {
+            animation: spinNumber 0.08s infinite;
+        }
+
+        @keyframes spinNumber {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .gacha-provider {
+            font-size: 0.95rem;
+            color: var(--text-soft);
+            margin-top: 8px;
+        }
+
+        .gacha-provider i {
+            color: #25D366;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-gacha {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(145deg, #ff2a2a, #b30000);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-bottom: 6px solid #630000;
+            transition: 0.1s;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn-gacha:active {
+            border-bottom-width: 2px;
+            transform: translateY(4px);
+        }
+
+        .btn-gacha:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-gacha .spin-icon {
+            animation: spinSlow 1.5s infinite linear;
+        }
+
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-copy {
+            width: 100%;
+            padding: 14px;
+            background: #2a2f3a;
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 4px solid #1a1f2a;
+            transition: 0.1s;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-copy:active {
+            border-bottom-width: 2px;
+            transform: translateY(3px);
+        }
+
+        .btn-copy.copied {
+            background: #4caf50;
+            border-bottom-color: #2e7d32;
+        }
+
+        .btn-wa {
+            width: 100%;
+            padding: 14px;
+            background: #25D366;
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 4px solid #128C7E;
+            transition: 0.1s;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-wa:active {
+            border-bottom-width: 2px;
+            transform: translateY(3px);
+        }
+
+        /* ===== HISTORY ===== */
+        .history-section {
+            margin-top: 18px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .history-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-list {
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 14px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin-bottom: 6px;
+            border-left: 4px solid #ff4d4d;
+            font-size: 0.8rem;
+        }
+
+        .history-item .h-number {
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: #ff6a6a;
+        }
+
+        .history-item .h-provider {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-left: 6px;
+        }
+
+        .history-item .h-time {
+            color: var(--text-muted);
+            font-size: 0.7rem;
+        }
+
+        .history-empty {
+            color: var(--text-muted);
+            text-align: center;
+            padding: 15px;
+            font-size: 0.85rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 70, 70, 0.15);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer a {
+            color: #ff6a6a;
+            text-decoration: none;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #ff4d4d; border-radius: 10px; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .container { padding: 25px 16px; }
+            .header h1 { font-size: 1.6rem; }
+            .gacha-number { font-size: 2.5rem; }
+            .status-item .number { font-size: 1.2rem; }
+        }
+    </style>
 </head>
 <body>
-  <video class="bg-video" autoplay muted loop playsinline>
-    <source src="https://files.catbox.moe/1p7a9d.mp4" type="video/mp4">
-  </video>
-  <div class="overlay"></div>
 
-  <header>
-    <div class="hamburger" id="hamburger">
-      <i data-lucide="menu"></i>
-    </div>
-  </header>
-
-  <nav id="sidebar" class="sidebar">
-    <a href="#" onclick="goHome()"><i data-lucide="home"></i> HOME</a>
-    <a href="#" onclick="loadSection('tools','pages/tools.html')"><i data-lucide="wrench"></i> TOOLS</a>
-    <a href="#" onclick="loadSection('script','pages/script.html')"><i data-lucide="file-code-2"></i> SCRIPT</a>
-    <a href="#" onclick="loadSection('shop','pages/shop.html')"><i data-lucide="shopping-cart"></i> SHOP / TOKO</a>
-    <a href="#" onclick="loadSection('html','pages/html.html')"><i data-lucide="code"></i> HTML</a>
-
-    <div class="label">MENU MEDIA SOSIAL</div>
-    <a href="https://t.me/Zyxxennn" target="_blank"><i data-lucide="send"></i> TELEGRAM</a>
-    <a href="https://t.me/ZyxxennnCH" target="_blank"><i data-lucide="rss"></i> CHANNEL TELEGRAM</a>
-    <a href="https://saweria.co/ZyxxennnOffociall" target="_blank"><i data-lucide="gift"></i> SAWERIA</a>
-
-        <div class="label">INFORMATION</div>
-    <a href="about.html" target="_blank"><i data-lucide="user"></i> ABOUT</a>
-  </nav>
-
-  <main class="wrap">
-    <img class="avatar" src="https://files.catbox.moe/egvoem.jpg" alt="Shiroko">
-    <h1>Shiroko</h1>
-    <p class="intro">
-      Halo! Saya Zyxxennn membuat website modern, aplikasi ringan, dan konten kreatif. 
-      Saya suka coding, suka membantu dan pengalaman pengguna yang senang dan bisa dimanfaatkan. 
-      Kalian bisa hubungi saya lewat tautan di bawah ini dan dapat info lewat channel telegram.
-    </p>
-
-    <div class="btn-row">
-      <a class="btn" href="https://saweria.co/ZyxxennnOffociall" target="_blank">SAWERIA</a>
-      <a class="btn" href="https://t.me/Zyxxennn" target="_blank">TELEGRAM</a>
-      <a class="btn" href="https://t.me/ZyxxennnCH" target="_blank">CHANNEL OWNER</a>
+<div class="container">
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-icon">
+            <i class="fas fa-dice"></i>
+        </div>
+        <h1>GACHA NOKOS</h1>
+        <p>Dapatkan nomor asli siap pakai! 🎲</p>
     </div>
 
-    <div class="menu-title">PILIHAN MENU</div>
-    <div class="btn-row">
-      <button class="btn" onclick="loadSection('tools','pages/tools.html')">TOOLS</button>
-      <button class="btn" onclick="loadSection('script','pages/script.html')">SCRIPT</button>
-      <button class="btn" onclick="loadSection('shop','pages/shop.html')">SHOP / TOKO</button>
-      <button class="btn" onclick="loadSection('html','pages/html.html')">HTML</button>
+    <!-- STATUS BAR -->
+    <div class="status-bar">
+        <div class="status-item">
+            <div class="number" id="totalGacha">0</div>
+            <div class="label">Total Gacha</div>
+        </div>
+        <div class="status-item">
+            <div class="number" id="totalNomor">0</div>
+            <div class="label">Nomor Tersedia</div>
+        </div>
+        <div class="status-item">
+            <div class="number" id="totalWA">0</div>
+            <div class="label">Ke WhatsApp</div>
+        </div>
     </div>
 
-    <div class="sections">
-      <div id="tools" class="section"></div>
-      <div id="script" class="section"></div>
-      <div id="shop" class="section"></div>
-      <div id="html" class="section"></div>
+    <!-- BOX GACHA -->
+    <div class="gacha-box" id="gachaBox">
+        <div class="gacha-number" id="gachaNumber">❓</div>
+        <div class="gacha-provider" id="gachaProvider">
+            <i class="fas fa-sim-card"></i> Klik tombol di bawah
+        </div>
     </div>
-  </main>
 
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const hamburger = document.getElementById('hamburger');
+    <!-- BUTTON GACHA -->
+    <button class="btn-gacha" id="btnGacha" onclick="gacha()">
+        <i class="fas fa-dice spin-icon"></i>
+        GACHA SEKARANG
+    </button>
 
-    // Toggle sidebar
-    hamburger.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
-      const icon = hamburger.querySelector('i');
-      icon.setAttribute('data-lucide', sidebar.classList.contains('open') ? 'x' : 'menu');
-      lucide.createIcons();
-    });
+    <!-- COPY & WA BUTTONS -->
+    <button class="btn-copy" id="btnCopy" onclick="copyNumber()">
+        <i class="fas fa-copy"></i> Copy Nomor
+    </button>
 
-    // Tutup sidebar saat klik di luar
-    document.addEventListener('click', (e) => {
-      if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
-        sidebar.classList.remove('open');
-        hamburger.querySelector('i').setAttribute('data-lucide','menu');
-        lucide.createIcons();
-      }
-    });
+    <button class="btn-wa" id="btnWA" onclick="openWA()">
+        <i class="fab fa-whatsapp"></i> Buka WhatsApp
+    </button>
 
-    function goHome(){
-      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-      sidebar.classList.remove('open');
-      hamburger.querySelector('i').setAttribute('data-lucide','menu');
-      lucide.createIcons();
-      window.scrollTo({top:0,behavior:'smooth'});
+    <!-- HISTORY -->
+    <div class="history-section">
+        <div class="history-title">
+            <span><i class="fas fa-clock"></i> Riwayat</span>
+            <span id="historyCount">0</span>
+        </div>
+        <div class="history-list" id="historyList">
+            <div class="history-empty">Belum ada riwayat gacha</div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>© 2026 <a href="#">DEXTER XRAT</a> · Nomor asli siap pakai</p>
+    </div>
+</div>
+
+<script>
+    // ==========================================
+    // GACHA NOKOS - DAPATKAN NOMOR ASLI
+    // ==========================================
+
+    // ========== DATABASE NOMOR ASLI ==========
+    const providerList = [
+        { name: 'Telkomsel', prefix: ['0811', '0812', '0813', '0821', '0822', '0823', '0851', '0852', '0853'] },
+        { name: 'Indosat', prefix: ['0814', '0815', '0816', '0855', '0856', '0857', '0858'] },
+        { name: 'XL Axiata', prefix: ['0817', '0818', '0819', '0859', '0877', '0878', '0879'] },
+        { name: 'Smartfren', prefix: ['0881', '0882', '0883', '0884', '0885', '0886'] },
+        { name: 'Three', prefix: ['0895', '0896', '0897', '0898', '0899'] },
+        { name: 'Axis', prefix: ['0831', '0832', '0833', '0838', '0839'] }
+    ];
+
+    // ========== STATE ==========
+    let currentNumber = '';
+    let currentProvider = '';
+    let totalGacha = parseInt(localStorage.getItem('totalGacha')) || 0;
+    let totalNomor = parseInt(localStorage.getItem('totalNomor')) || 0;
+    let history = JSON.parse(localStorage.getItem('gachaHistory')) || [];
+
+    // ========== DOM ==========
+    const gachaNumber = document.getElementById('gachaNumber');
+    const gachaProvider = document.getElementById('gachaProvider');
+    const btnGacha = document.getElementById('btnGacha');
+    const btnCopy = document.getElementById('btnCopy');
+    const btnWA = document.getElementById('btnWA');
+    const totalGachaEl = document.getElementById('totalGacha');
+    const totalNomorEl = document.getElementById('totalNomor');
+    const totalWAEl = document.getElementById('totalWA');
+    const historyList = document.getElementById('historyList');
+    const historyCount = document.getElementById('historyCount');
+
+    // ========== UPDATE UI ==========
+    function updateUI() {
+        totalGachaEl.textContent = totalGacha;
+        totalNomorEl.textContent = totalNomor;
+        totalWAEl.textContent = history.filter(h => h.wa === true).length;
+        historyCount.textContent = history.length;
+        renderHistory();
+        saveState();
     }
 
-    function loadSection(id,url){
-      fetch(url)
-        .then(res=>res.text())
-        .then(html=>{
-          document.getElementById(id).innerHTML=html;
-          document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-          document.getElementById(id).classList.add('active');
-          sidebar.classList.remove('open');
-          hamburger.querySelector('i').setAttribute('data-lucide','menu');
-          lucide.createIcons();
+    // ========== SAVE STATE ==========
+    function saveState() {
+        localStorage.setItem('totalGacha', totalGacha);
+        localStorage.setItem('totalNomor', totalNomor);
+        localStorage.setItem('gachaHistory', JSON.stringify(history));
+    }
+
+    // ========== GENERATE NOMOR ==========
+    function generateNumber() {
+        const provider = providerList[Math.floor(Math.random() * providerList.length)];
+        const prefix = provider.prefix[Math.floor(Math.random() * provider.prefix.length)];
+        const suffix = String(Math.floor(Math.random() * 10000000)).padStart(7, '0');
+        return { number: prefix + suffix, provider: provider.name };
+    }
+
+    // ========== GACHA ==========
+    function gacha() {
+        btnGacha.disabled = true;
+        btnGacha.innerHTML = '<i class="fas fa-sync-alt spin-icon"></i> MEMUTAR...';
+        gachaNumber.className = 'gacha-number spinning';
+
+        let count = 0;
+        const maxCount = 20;
+        const interval = setInterval(() => {
+            const random = generateNumber();
+            gachaNumber.textContent = random.number;
+            gachaProvider.innerHTML = `<i class="fas fa-sim-card"></i> ${random.provider}`;
+            count++;
+            if (count >= maxCount) {
+                clearInterval(interval);
+                const result = generateNumber();
+                currentNumber = result.number;
+                currentProvider = result.provider;
+
+                gachaNumber.textContent = result.number;
+                gachaNumber.className = 'gacha-number';
+                gachaProvider.innerHTML = `<i class="fas fa-sim-card"></i> ${result.provider}`;
+
+                totalGacha++;
+                totalNomor++;
+                history.unshift({
+                    number: currentNumber,
+                    provider: currentProvider,
+                    wa: false,
+                    time: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })
+                });
+                if (history.length > 50) history.pop();
+
+                updateUI();
+                btnGacha.disabled = false;
+                btnGacha.innerHTML = '<i class="fas fa-dice spin-icon"></i> GACHA SEKARANG';
+                btnCopy.className = 'btn-copy';
+                btnCopy.innerHTML = '<i class="fas fa-copy"></i> Copy Nomor';
+            }
+        }, 80);
+    }
+
+    // ========== COPY NOMOR ==========
+    function copyNumber() {
+        if (!currentNumber) {
+            alert('❌ Gacha dulu!');
+            return;
+        }
+        navigator.clipboard.writeText(currentNumber).then(() => {
+            btnCopy.className = 'btn-copy copied';
+            btnCopy.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
+            setTimeout(() => {
+                btnCopy.className = 'btn-copy';
+                btnCopy.innerHTML = '<i class="fas fa-copy"></i> Copy Nomor';
+            }, 2000);
         });
     }
 
-    lucide.createIcons();
-  </script>
+    // ========== BUKA WHATSAPP ==========
+    function openWA() {
+        if (!currentNumber) {
+            alert('❌ Gacha dulu!');
+            return;
+        }
+        // Update history bahwa nomor ini dibuka ke WA
+        const idx = history.findIndex(h => h.number === currentNumber);
+        if (idx !== -1) {
+            history[idx].wa = true;
+            saveState();
+            updateUI();
+        }
+        window.open(`https://wa.me/62${currentNumber}`, '_blank');
+    }
+
+    // ========== RENDER HISTORY ==========
+    function renderHistory() {
+        if (history.length === 0) {
+            historyList.innerHTML = '<div class="history-empty">Belum ada riwayat gacha</div>';
+            return;
+        }
+
+        let html = '';
+        history.forEach((item) => {
+            const waIcon = item.wa ? '💚' : '';
+            html += `
+                <div class="history-item">
+                    <div>
+                        <span class="h-number">${item.number}</span>
+                        <span class="h-provider">${item.provider}</span>
+                        ${waIcon}
+                    </div>
+                    <div class="h-time">${item.time}</div>
+                </div>
+            `;
+        });
+        historyList.innerHTML = html;
+    }
+
+    // ========== INISIALISASI ==========
+    updateUI();
+
+    // Auto generate nomor pertama
+    setTimeout(() => {
+        const first = generateNumber();
+        gachaNumber.textContent = first.number;
+        gachaProvider.innerHTML = `<i class="fas fa-sim-card"></i> ${first.provider}`;
+        currentNumber = first.number;
+        currentProvider = first.provider;
+    }, 500);
+
+    console.log('🎲 GACHA NOKOS READY');
+    console.log('📊 Total Gacha:', totalGacha);
+    console.log('📋 History:', history.length);
+</script>
+
 </body>
-                                                                                </html>
+</html>
